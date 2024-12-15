@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login and Payment</title>
+</head>
+<body>
+    <h1>Login and Payment</h1>
+    <form id="loginForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+        <button type="submit">Submit</button>
+    </form>
+    <div id="message"></div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                // Send username and password to Function 1
+                const response = await fetch('https://<your-deployment-url>/api/initial', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Handle Stripe payment if Function 1 was successful
+                    await handleStripePayment(result.paymentIntentId);
+                } else {
+                    throw new Error('Initial processing failed');
+                }
+            } catch (error) {
+                await sendErrorEmail('Initial processing error: ' + error.message);
+                document.getElementById('message').textContent = 'Error: ' + error.message;
+            }
+        });
+
+        async function handleStripePayment(paymentIntentId) {
+            try {
+                const stripe = Stripe('your-publishable-key-here');
+                const result = await stripe.confirmCardPayment(paymentIntentId);
+
+                if (result.error) {
+                    throw new Error(result.error.message);
+                } else {
+                    // Payment succeeded, send data to Function 2
+                    const response = await fetch('https://<your-deployment-url>/api/second', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ username, password })
+                    });
+
+                    const result = await response.json();
+
+                    if (!result.success) {
+                        throw new Error('Second function processing failed');
+                    }
+                }
+            } catch (error) {
+                await sendErrorEmail('Stripe payment error: ' + error.message);
+                document.getElementById('message').textContent = 'Error: ' + error.message;
+            }
+        }
+
+        async function sendErrorEmail(errorMessage) {
+            try {
+                await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        service_id: 'your-service-id',
+                        template_id: 'your-template-id',
+                        user_id: 'your-user-id',
+                        template_params: {
+                            to_email: 'recipient@example.com',
+                            subject: 'Error Notification',
+                            message: errorMessage
+                        }
+                    })
+                });
+            } catch (error) {
+                console.error('Error sending email:', error);
+            }
+        }
+    </script>
+
+    <script src="https://js.stripe.com/v3/"></script>
+</body>
+</html>

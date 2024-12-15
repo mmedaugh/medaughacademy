@@ -1,237 +1,544 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generated HTML</title>
-    <style>
-        body {
-            background-color: lightblue;
-            position: relative; /* Needed for button positioning */
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            position: relative; /* Ensure relative positioning within the body */
-        }
-        .title {
-            text-align: center;
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-        .subtitle {
-            text-align: center;
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: left;
-            background-color: white; /* Set background to white */
-        }
-        th {
-            background-color: lightgray;
-        }
-        .circle {
-            height: 20px;
-            width: 20px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-        .gray-background {
-            background-color: lightgray;
-        }
-        .key-container {
-            margin-top: 20px;
-        }
-        .key-table {
-            width: 50%;
-            margin: 0 auto;
-            border-collapse: collapse;
-            text-align: center;
-        }
-        .key-th, .key-td {
-            padding: 5px;
-        }
-        .toggle-button {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            padding: 10px 20px;
-            background-color: lightgray;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .page-footer {
-            text-align: center;
-            margin-top: 20px;
-            margin-bottom: 50px; /* Ensure space below for button */
-        }
-        .question-container {
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .question {
-            margin-bottom: 10px;
-        }
-        .answer-option {
-            margin-top: 5px;
-        }
-        img {
-            max-width: 500px;
-            max-height: 500px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        p {
-            margin-left: 150px;
-        }
-        strong {
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
-    <div id="page1" class="container">
-        <h1 class="title">Generated HTML Page</h1>
-        <h2 class="subtitle">Table of Standard Data</h2>
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Medaugh Academy &mdash; Home Page</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
+	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+	<meta name="author" content="freehtml5.co" />
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Standard ID</th>
-                    <th>Circle Color</th>
-                    <th>Formative Questions</th>
-                    <th>Correct Options Selected</th>
-                    <th>Incorrect Options Selected</th>
-                    <th>Points Earned</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for row in rows %}
-                <tr {% if row[6] == 'gray' %} class="gray-background" {% endif %}>
-                    <td>{{ row[0] }}</td>
-                    <td><div class="circle" style="background-color:{{ row[1] }}"></div></td>
-                    <td>{{ row[2] }}</td>
-                    <td>{{ row[3] }}</td>
-                    <td>{{ row[4] }}</td>
-                    <td>{{ row[5] }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+	<!-- 
+	//////////////////////////////////////////////////////
 
-        <div class="key-container">
-            <h2>Key:</h2>
-            <table class="key-table">
-                <tr>
-                    <th>Color</th>
-                    <th>Meaning</th>
-                </tr>
-                <tr>
-                    <td style="background-color: purple;"></td>
-                    <td>Prepared for a 5</td>
-                </tr>
-                <tr>
-                    <td style="background-color: green;"></td>
-                    <td>Prepared for a 4</td>
-                </tr>
-                <tr>
-                    <td style="background-color: yellow;"></td>
-                    <td>Prepared for a 3</td>
-                </tr>
-                <tr>
-                    <td style="background-color: red;"></td>
-                    <td>Unprepared</td>
-                </tr>
-                <tr>
-                    <td style="background-color: gray;"></td>
-                    <td>Not Enough Data</td>
-                </tr>
-            </table>
-        </div>
-        
-        {% if string_list %}
-        <div class="page-footer">
-            <h2>List of Strings:</h2>
-            {% for string in string_list %}
-                <p>{{ string }}</p>
-            {% endfor %}
-        </div>
-        {% endif %}
-        <button class="toggle-button" onclick="togglePage()">Toggle Page</button>
-    </div>
-    <div id="page2" style="display:none;">
-        <h1 class="title">Questions wrong</h1>
-        <h2 class="subtitle">fkjwefn</h2>
+	FREE HTML5 TEMPLATE 
+	DESIGNED & DEVELOPED by FreeHTML5.co
+		
+	Website: 		http://freehtml5.co/
+	Email: 			info@freehtml5.co
+	Twitter: 		http://twitter.com/fh5co
+	Facebook: 		https://www.facebook.com/fh5co
 
-        {% for question in questionList %}
-            <!-- Render question content dynamically -->
-            {% if question['image_paths'] is not none %}
-                {% for path in question['image_paths'] %}
-                    <img src="{{ path }}" alt="Image">
-                {% endfor %}
-            {% endif %}
-            {% if question['stimulus_text'] is not none %}
-                <p>{{ question['stimulus_text'] }}</p>
-            {% endif %}
-            <p class="question">{{ question['question_stem'] }}</p>
-            {% for option_key, option_value in question.items() %}
-                {% if option_key.startswith('option_') %}
-                    <p class="answer-option">
-                        Answer Option {{ option_key[-1] }}: 
-                        {% if option_value['correct'] %}
-                            <strong>{{ option_value['content'] }}</strong>
-                        {% else %}
-                            {{ option_value['content'] }}
-                        {% endif %}
-                    </p>
-                {% endif %}
-            {% endfor %}
-            <hr>
-        {% endfor %}
-        <button class="toggle-button" onclick="togglePage()">Toggle Page</button>
-    </div>
+	//////////////////////////////////////////////////////
+	 -->
 
-    <script>
-        var selectedUnit = "all"; // Default value for selected unit
+  	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
 
-        function togglePage() {
-            var page1 = document.getElementById('page1');
-            var page2 = document.getElementById('page2');
-            
-            if (page1.style.display === 'block') {
-                page1.style.display = 'none';
-                page2.style.display = 'block';
-            } else {
-                page1.style.display = 'block';
-                page2.style.display = 'none';
-            }
-        }
+	<link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800" rel="stylesheet">
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
 
-        function filterQuestions() {
-            selectedUnit = document.getElementById('unit-selection').value;
-            var questions = document.querySelectorAll('.question-container');
-            
-            questions.forEach(function(question) {
-                var unitName = question.getAttribute('data-unit-name');
-                if (selectedUnit === 'all' || unitName === selectedUnit) {
-                    question.style.display = 'block';
-                } else {
-                    question.style.display = 'none';
-                }
-            });
-        }
-    </script>
-    
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="css/magnific-popup.css">
 
-</body>
+	<!-- Owl Carousel  -->
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+	</head>
+	<body>
+		
+	<div class="fh5co-loader"></div>
+	
+	<div id="page">
+	<nav class="fh5co-nav" role="navigation">
+		<div class="top">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 text-right">
+						<p class="num">Email: medaughacademy@gmail.com</p>
+						<ul class="fh5co-social">
+							<li><a href="#"><i class="icon-twitter"></i></a></li>
+							<li><a href="#"><i class="icon-dribbble"></i></a></li>
+							<li><a href="#"><i class="icon-github"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="top-menu">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-1">
+						<div id="fh5co-logo">
+							<a href="index.html">
+								<img src="images/logo.jpg" alt="Medaugh Academy Logo" style="max-height: 180px;">
+							</a>
+						</div>
+					</div>
+					<div class="col-xs-11 text-right menu-1">
+						<ul>
+							<li class="active"><a href="index.html">Home</a></li>
+							<li class="has-dropdown">
+								<a href="courses.html">Academics</a>
+								<ul class="dropdown">
+									<li><a href="#">Online Courses</a></li>
+									<li><a href="#">Tutoring</a></li>
+									<li><a href="pricing.html"> Pricing & Financial Aid</a></li>
+								</ul>
+							</li>
+							<li class="has-dropdown">
+								<a href="blog.html">Free Resources</a>
+								<ul class="dropdown">
+									<li><a href="calendar.html">Zoom Lectures</a></li>
+									<li><a href="#">Practice Tests</a></li>
+								</ul>
+							</li>
+							<li class="has-dropdown">
+								<a href="courses.html">About Us</a>
+								<ul class="dropdown">
+										<li><a href="#">Our Mission</a></li>
+										<li><a href="staff.html">Faculty</a></li>
+										<li><a href="#">National Honorees</a></li>
+										<li><a href="#">Medaugh Scholars</a></li>
+								</ul>
+							</li>
+							<li><a href="contact.html">Contact</a></li>
+							<li class="btn-cta"><a href="https://canvas.instructure.com/login/canvas"><span>To Canvas</span></a></li>
+							<li class="btn-cta"><a href="https://app.tutorbird.com/"><span>To TutorBird</span></a></li>
+						</ul>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</nav>
+
+	<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(images/img_bg_1.jpg);" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center">
+					<div class="display-t">
+						<div class="display-tc animate-box" data-animate-effect="fadeIn">
+							<h1>“In times of drastic change, it is the learners who inherit the future."</h1>
+							<h2>- Eric Hoffer</h2>
+							<p><a class="btn btn-primary btn-lg btn-learn" href="#">Take A Course</a> <a class="btn btn-primary btn-lg popup-vimeo btn-video" href="https://vimeo.com/channels/staffpicks/93951774"><i class="icon-play"></i> Who We Are</a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div id="fh5co-counter" class="fh5co-counters">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 text-center animate-box">
+					<span class="fh5co-counter js-counter" data-from="0" data-to="40356" data-speed="5000" data-refresh-interval="50"></span>
+					<span class="fh5co-counter-label">National Honorees </span>
+				</div>
+				<div class="col-md-3 text-center animate-box">
+					<span class="fh5co-counter js-counter" data-from="0" data-to="30290" data-speed="5000" data-refresh-interval="50"></span>
+					<span class="fh5co-counter-label">Courses Offered</span>
+				</div>
+				<div class="col-md-3 text-center animate-box">
+					<span class="fh5co-counter js-counter" data-from="0" data-to="2039" data-speed="5000" data-refresh-interval="50"></span>
+					<span class="fh5co-counter-label">Individualized Questions Written</span>
+				</div>
+				<div class="col-md-3 text-center animate-box">
+					<span class="fh5co-counter js-counter" data-from="0" data-to="997585" data-speed="5000" data-refresh-interval="50"></span>
+					<span class="fh5co-counter-label">Hours Volunteered</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="fh5co-explore" class="fh5co-bg-section">
+		<div class="container">
+			<div class="row animate-box">
+				<div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
+					<h2>Take A Course</h2>
+					<p>At the bleeding edge of personalized education, machine learning, and academic efficiency, our courses deliver an unparalleled product in both useability and exam results. </p>
+				</div>
+			</div>
+		</div>		
+		<div class="fh5co-explore fh5co-explore1">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-push-5 animate-box">
+						<img class="img-responsive" src="images/work_1.png" alt="work">
+					</div>
+					<div class="col-md-4 col-md-pull-8 animate-box">
+						<div class="mt">
+							<h3>The Medaugh Difference</h3>
+							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+							<ul class="list-nav">
+								<li><i class="icon-check2"></i>Far far away, behind the word</li>
+								<li><i class="icon-check2"></i>There live the blind texts</li>
+								<li><i class="icon-check2"></i>Separated they live in bookmarksgrove</li>
+							</ul>
+							<p><a class="btn btn-primary btn-lg popup-vimeo btn-video" href="https://vimeo.com/channels/staffpicks/93951774"><i class="icon-play"></i> Watch Video</a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="fh5co-explore">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-pull-1 animate-box">
+						<img class="img-responsive" src="images/work_1.png" alt="work">
+					</div>
+					<div class="col-md-4 animate-box">
+						<div class="mt">
+							<div>
+								<h4><i class="icon-user"></i>We Create Individualized Questions For Every Student</h4>
+								<p>Students are more engaged when studying materials that are important to them. Our technology is unique in its ability to create personalized questions without compromising question rigor and relevance. Students are able in input any interest and receive personalized exams and study materials.</p>
+							</div>
+							<div>
+								<h4><i class="icon-video2"></i>Synthesizing The Best Study Materials In The World</h4>
+								<p>Why reinvent the wheel? Our courses license the best video lectures in the world, appending and improving them with our own resources in order to provide the best learning experiences possible. We have hand picked the most essential and concise lectures in every topic to most efficiently accelerate students.</p>
+							</div>
+							<div>
+								<h4><i class="icon-shield"></i>We Guarantee Your Results </h4>
+								<p>Students that complete all aspects of their purchased course and do not receive their goal score or higher will receive at least a 50% rembursement. We have never had to refund a student.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="fh5co-project">
+		<div class="container">
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+					<h2>Course Offerings</h2>
+					<p>A sample of our most popular courses.</p>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid proj-bottom">
+			<div class="row">
+				<div class="col-md-4 col-sm-6 fh5co-project animate-box" data-animate-effect="fadeIn">
+					<a href="#"><img src="images/project-1.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
+						<h3>SAT (English)</h3>
+						<span>View Course</span>
+					</a>
+				</div>
+				<div class="col-md-4 col-sm-6 fh5co-project animate-box" data-animate-effect="fadeIn">
+					<a href="#"><img src="images/project-2.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
+						<h3>SAT (Math)</h3>
+						<span>View Course</span>
+					</a>
+				</div>
+				<div class="col-md-4 col-sm-6 fh5co-project animate-box" data-animate-effect="fadeIn">
+					<a href="#"><img src="images/project-3.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
+						<h3>SAT (Math & English)</h3>
+						<span>View Course</span>
+					</a>
+				</div>
+				<div class="col-md-4 col-sm-6 fh5co-project animate-box" data-animate-effect="fadeIn">
+					<a href="#"><img src="images/project-9.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
+						<h3>AP US History</h3>
+						<span>View Course</span>
+					</a>
+				</div>
+				<div class="col-md-4 col-sm-6 fh5co-project animate-box" data-animate-effect="fadeIn">
+					<a href="#"><img src="images/project-5.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
+						<h3>AP Psychology</h3>
+						<span>View Course</span>
+					</a>
+				</div>
+				<div class="col-md-4 col-sm-6 fh5co-project animate-box" data-animate-effect="fadeIn">
+					<a href="#"><img src="images/project-6.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
+						<h3>AP Statistics</h3>
+						<span>View Course</span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="features">
+					<div class="col-md-4 animate-box">
+						<h4>Question Quality</h4>
+						<p>According to a survey of AP and SAT teachers and tutors, our questions were more aligned to their respective exams than all other private companies in the survey.</p>
+					</div>
+					<div class="col-md-4 animate-box">
+						<h4>Question Quantity</h4>
+						<p>Our resources provide a greater number of high-quality, full-length practice tests than all other major test prep companies.</p>
+					</div>
+					<div class="col-md-4 animate-box">
+						<h4>Dynamic Feedback</h4>
+						<p>Our online grading of AP FRQs is the only tool of its kind on the market.</p>
+					</div>
+				</div>
+				<div class="col-md-12 text-center animate-box">
+					<p><a class="btn btn-primary btn-lg btn-learn" href="courses.html">See All Courses</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="fh5co-steps">
+		<div class="container">
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+					<h2>A Path Towards Equity</h2>
+					<p>We do not simply seek to teach, but to teach well, teach fairly, and teach compassionately. We believe our model for personalized education is the flagship for the coming revolution of post-secondary education. With this in mind, we have built our products to integrate with in-person instruction, encourage international cooperation between our students, and expand academic equity.</p>
+				</div>
+			</div>
+
+			<div class="row bs-wizard animate-box" style="border-bottom:0;">
+                
+				<div class="col-xs-3 bs-wizard-step complete">
+					<div class="text-center bs-wizard-stepnum"><h4>Step 1</h4></div>
+					<div class="progress"><div class="progress-bar"></div></div>
+					<a href="#" class="bs-wizard-dot"></a>
+					<div class="bs-wizard-info text-center"><p>Develop a World Class Curriculum</p></div>
+				</div>
+
+				<div class="col-xs-3 bs-wizard-step active"><!-- complete -->
+					<div class="text-center bs-wizard-stepnum"><h4>Step 2</h4></div>
+					<div class="progress"><div class="progress-bar"></div></div>
+					<a href="#" class="bs-wizard-dot"></a>
+					<div class="bs-wizard-info text-center"><p>Cultivate our Student Base</p></div>
+				</div>
+
+				<div class="col-xs-3 bs-wizard-step disabled"><!-- complete -->
+					<div class="text-center bs-wizard-stepnum"><h4>Step 3</h4></div>
+					<div class="progress"><div class="progress-bar"></div></div>
+					<a href="#" class="bs-wizard-dot"></a>
+					<div class="bs-wizard-info text-center"><p>Seek Degree Granting Accreditation</p></div>
+				</div>
+
+				<div class="col-xs-3 bs-wizard-step disabled"><!-- active -->
+					<div class="text-center bs-wizard-stepnum"><h4>Step 4</h4></div>
+					<div class="progress"><div class="progress-bar"></div></div>
+					<a href="#" class="bs-wizard-dot"></a>
+					<div class="bs-wizard-info text-center"><p>Create In-Person Campuses</p></div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<div id="fh5co-testimonial" class="fh5co-bg-section">
+		<div class="container">
+			<div class="row animate-box">
+				<div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
+					<h2>Testimonials</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1">
+					<div class="row animate-box">
+						<div class="owl-carousel owl-carousel-fullwidth">
+							<div class="item">
+								<div class="testimony-slide active text-center">
+									<figure>
+										<img src="images/person_1.jpg" alt="user">
+									</figure>
+									<span>Jean Doe, via <a href="#" class="twitter">Twitter</a></span>
+									<blockquote>
+										<p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
+									</blockquote>
+								</div>
+							</div>
+							<div class="item">
+								<div class="testimony-slide active text-center">
+									<figure>
+										<img src="images/person_2.jpg" alt="user">
+									</figure>
+									<span>John Doe, via <a href="#" class="twitter">Twitter</a></span>
+									<blockquote>
+										<p>&ldquo;Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
+									</blockquote>
+								</div>
+							</div>
+							<div class="item">
+								<div class="testimony-slide active text-center">
+									<figure>
+										<img src="images/person_2.jpg" alt="user">
+									</figure>
+									<span>John Doe, via <a href="#" class="twitter">Twitter</a></span>
+									<blockquote>
+										<p>&ldquo;Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
+									</blockquote>
+								</div>
+							</div>
+							<div class="item">
+								<div class="testimony-slide active text-center">
+									<figure>
+										<img src="images/person_2.jpg" alt="user">
+									</figure>
+									<span>John Doe, via <a href="#" class="twitter">Twitter</a></span>
+									<blockquote>
+										<p>&ldquo;Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
+									</blockquote>
+								</div>
+							</div>
+							<div class="item">
+								<div class="testimony-slide active text-center">
+									<figure>
+										<img src="images/person_2.jpg" alt="user">
+									</figure>
+									<span>John Doe, via <a href="#" class="twitter">Twitter</a></span>
+									<blockquote>
+										<p>&ldquo;Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
+									</blockquote>
+								</div>
+							</div>
+							<div class="item">
+								<div class="testimony-slide active text-center">
+									<figure>
+										<img src="images/person_2.jpg" alt="user">
+									</figure>
+									<span>John Doe, via <a href="#" class="twitter">Twitter</a></span>
+									<blockquote>
+										<p>&ldquo;Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
+									</blockquote>
+								</div>
+							</div>
+							<div class="item">
+								<div class="testimony-slide active text-center">
+									<figure>
+										<img src="images/person_3.jpg" alt="user">
+									</figure>
+									<span>John Doe, via <a href="#" class="twitter">Twitter</a></span>
+									<blockquote>
+										<p>&ldquo;Far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
+									</blockquote>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="fh5co-blog">
+		<div class="container">
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+					<h2>Free Zoom Office Hours</h2>
+					<p>With the intent of providing the free and open access to important information regarding the high school and college experience, we are proud to offer free Zoom office hours, lectures, and Q&A's. These sessions will largely emphasize economical ways to attend college (scholarships, transfer credit, & financial aid), how to achieve high scores on standardized asssessments (SAT, AP, National Math & Science Competitions, and more), and generalized academic acceleration. We will feature expert guest speakers in these fields. See our full calendar for more details.</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 col-md-4">
+					<div class="fh5co-blog animate-box">
+						<a href="#"><img class="img-responsive" src="images/project-4.jpg" alt=""></a>
+						<div class="blog-text">
+							<h3><a href=""#>Graduate College in 12 Months!?!</a></h3>
+							<span class="posted_on">Sep. 10th</span>
+							<p>Here we explore the limits to which AP and other credit-by-examination resources can be exploited to accelerate and minimize the costs of college tuition.</p>
+							<a href="#" class="btn btn-primary">Read More</a>
+						</div> 
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4">
+					<div class="fh5co-blog animate-box">
+						<a href="#"><img class="img-responsive" src="images/project-2.jpg" alt=""></a>
+						<div class="blog-text">
+							<h3><a href=""#>Stacked Studying</a></h3>
+							<span class="posted_on">Sep. 17th</span>
+							<span class="comment"><a href="">21<i class="icon-speech-bubble"></i></a></span>
+							<p>Studying for certain topics implicitly trains you for others. How to minimize your necessary study time by maximizing productivity.</p>
+							<a href="#" class="btn btn-primary">Read More</a>
+						</div> 
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4">
+					<div class="fh5co-blog animate-box">
+						<a href="#"><img class="img-responsive" src="images/project-3.jpg" alt=""></a>
+						<div class="blog-text">
+							<h3><a href=""#>So you want to self-study an AP course?</a></h3>
+							<span class="posted_on">Sep. 24th</span>
+							<span class="comment"><a href="">21<i class="icon-speech-bubble"></i></a></span>
+							<p>Straight from the horse's mouth, the king of AP self-studying gives you details on what to resources and courses to select.</p>
+							<a href="#" class="btn btn-primary">Read More</a>
+						</div> 
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="fh5co-started" style="background-image:url(images/img_bg_2.jpg);">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+					<h2>Lets Get Started</h2>
+					<p>This button will take you to a Google Form that will help you create your initial Canvas and TutorBird accounts.</p>
+				</div>
+			</div>
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center">
+					<p><a href="https://docs.google.com/forms/d/e/1FAIpQLSd0IOCcartic52zuEymAkb6KD8VS3jbGEEWmXDZi2rfbynaAw/viewform?usp=pp_url" class="btn btn-default btn-lg">Intake Form</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer id="fh5co-footer" role="contentinfo">
+		<div class="container">
+			<div class="row row-pb-md">
+				<div class="col-md-3 fh5co-widget">
+					<h4>Medaugh Academy</h4>
+					<p>The future of academic excellence and equity.</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+	</div>
+	
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Stellar Parallax -->
+	<script src="js/jquery.stellar.min.js"></script>
+	<!-- Carousel -->
+	<script src="js/owl.carousel.min.js"></script>
+	<!-- countTo -->
+	<script src="js/jquery.countTo.js"></script>
+	<!-- Magnific Popup -->
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/magnific-popup-options.js"></script>
+	<!-- Main -->
+	<script src="js/main.js"></script>
+
+	</body>
 </html>
+
